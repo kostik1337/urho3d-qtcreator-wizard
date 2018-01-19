@@ -2,7 +2,12 @@
 #ifndef %{GUARD}
 #define %{GUARD}
 
-#include <Urho3D/Urho3D.h>
+@if '%{Base}' === 'LogicComponent'
+#include <Urho3D/Scene/LogicComponent.h>
+@elsif '%{Base}' === 'Component'
+#include <Urho3D/Scene/Component.h>
+@endif
+#include <Urho3D/Scene/Node.h>
 
 using namespace Urho3D;
 
@@ -17,10 +22,8 @@ class %{CN}
 public:
 @if '%{Base}' === 'Drawable'
 	%{CN}(Context* context, unsigned char drawableFlags);
-@elsif %{isUrho3DClass}
-	%{CN}(Context* context);
 @else	
-	%{CN}();
+	%{CN}(Context* context);
 @endif
 @if '%{Base}' === 'LogicComponent'
     static void RegisterObject(Context* context);

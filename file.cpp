@@ -2,13 +2,6 @@
 #include "%{HdrFileName}"
 %{JS: Cpp.openNamespaces('%{Class}')}
 
-@if '%{Base}' === 'LogicComponent'
-void %{CN}::RegisterObject(Context* context)
-{
-	context->RegisterFactory<%{CN}>();
-}
-
-@endif
 @if '%{Base}' === 'Object' || '%{Base}' === 'Component' || '%{Base}' === 'LogicComponent'
 %{CN}::%{CN}(Context* context) : %{Base}(context)
 @elsif '%{Base}' === 'Drawable'
@@ -19,12 +12,13 @@ void %{CN}::RegisterObject(Context* context)
 %{CN}::%{CN}()
 @endif
 {
-
-}
 @if '%{Base}' === 'LogicComponent'
+SetUpdateEventMask(USE_UPDATE);
+@endif
+}
+@if '%{Base}' === 'LogicComponent' || '%{Base}' === 'Component'
 
-void %{CN}::OnNodeSet(Node* node)
-{ (void)node;
+void %{CN}::OnNodeSet(Node* node) {
 }
 
 void %{CN}::Update(float timeStep)
@@ -32,6 +26,3 @@ void %{CN}::Update(float timeStep)
 }
 @endif
 %{JS: Cpp.closeNamespaces('%{Class}')}\
-
-
-
