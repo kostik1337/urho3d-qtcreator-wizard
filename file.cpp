@@ -2,12 +2,10 @@
 #include "%{HdrFileName}"
 %{JS: Cpp.openNamespaces('%{Class}')}
 
-@if '%{Base}' === 'Object' || '%{Base}' === 'Component' || '%{Base}' === 'LogicComponent'
-%{CN}::%{CN}(Context* context) : %{Base}(context)
-@elsif '%{Base}' === 'Drawable'
+@if '%{Base}' === 'Drawable'
 %{CN}::%{CN}(Context* context, unsigned char drawableFlags) : Drawable(context, drawableFlags)
 @elsif '%{Base}'
-%{CN}::%{CN}() : %{Base}()
+%{CN}::%{CN}(Context* context) : %{Base}(context)
 @else
 %{CN}::%{CN}()
 @endif
