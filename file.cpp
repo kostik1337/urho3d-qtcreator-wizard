@@ -18,7 +18,9 @@ SetUpdateEventMask(USE_UPDATE);
 
 void %{CN}::OnNodeSet(Node* node) {
 }
+@endif
 
+@if '%{Base}' === 'LogicComponent'
 void %{CN}::Update(float timeStep)
 {
 }
